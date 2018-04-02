@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:text="Aplikasi ini membutuhkan akses untuk membaca lokasi"
+            android:text="Aplikasi ini membutuhkan akses untuk membaca lokasi."
             android:textSize="22sp"
             android:fontFamily="serif"
             android:layout_marginBottom="20dp"/>

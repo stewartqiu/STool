@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application>
-        <activity android:name=".ReqLocationActivity"></activity>
+        <activity android:name=".ReqLocationActivity"
+            android:configChanges="orientation|screenSize"/>
     </application>
 </manifest>

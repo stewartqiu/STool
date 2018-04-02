@@ -1,1 +1,1 @@
-include ':app', ':mod_builder', ':stool'
+include ':app', ':stool'
