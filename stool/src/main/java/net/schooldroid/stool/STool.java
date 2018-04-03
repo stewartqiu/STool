@@ -18,11 +18,12 @@ public class STool {
 
 
     public static void handleLocationPermission(Activity activity, STool.locAccessListener listener){
-
         boolean isAllow = checkLocationPermission(activity);
         if (!isAllow) {
             ReqLocationActivity.listener = listener;
             activity.startActivity(new Intent(activity, ReqLocationActivity.class));
+        } else {
+            listener.onSuccess();
         }
     }
 

@@ -1,5 +1,6 @@
 package net.schooldroid.builder;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,6 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 
     @Override
     public void onSuccess() {
-        Log.d("location","YEEEE BERHASIL!!!!!!!");
+        
     }
 }
