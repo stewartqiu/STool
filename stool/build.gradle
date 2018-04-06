@@ -5,7 +5,6 @@ android {
     compileSdkVersion 27
 
 
-
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 27
@@ -29,7 +28,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:support-v4:27.1.0'
+    implementation 'com.android.support:support-media-compat:27.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.google.android.gms:play-services-location:12.0.1'
+    implementation 'com.google.android.gms:play-services-places:12.0.1'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+    implementation 'org.sufficientlysecure:html-textview:3.5'
+    implementation 'org.jsoup:jsoup:1.10.3'
 }
