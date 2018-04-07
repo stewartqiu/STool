@@ -1,42 +1,31 @@
 package net.schooldroid.builder;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import net.schooldroid.stool.SGps;
+import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.STool;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements STool.locAccessListener {
 
-
-    FusedLocationProviderClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        client = LocationServices.getFusedLocationProviderClient(this);
+//        Log.d("MacAddress",STool.getWifiMacAddress());
+//        Log.d("Bluetooth_Address",STool.getBtMacAddress(this));
 
         Button button = findViewById(R.id.mybutt);
         button.setOnClickListener(new View.OnClickListener() {
@@ -49,36 +38,26 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
     }
 
 
+
     @Override
     public void onSuccess() {
 
 
-        new async().execute();
+//        new async().execute();
+//
+//        SGps.reqHighGps(this);
+//
+//        final SGps sgps = new SGps(MainActivity.this);
+//        sgps.on(new LocationListener() {
+//            @Override
+//            public void onLocationChanged(Location location) {
+//                Log.d("GPS DEBUG", "" + location.getLatitude() + "," + location.getLongitude() );
+//                sgps.off();
+//            }
+//        });
 
-        SGps.reqHighGps(this);
 
-        final SGps sgps = new SGps(MainActivity.this);
-        sgps.on(new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.d("GPS DEBUG", "" + location.getLatitude() + "," + location.getLongitude() );
-                sgps.off();
-            }
-        });
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        client.getLastLocation().addOnSuccessListener(MainActivity.this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location!=null) {
-                    Log.d("NEW GPS", location.toString());
-                }
-            }
-        });
-
+        testJuknis();
 
     }
 
@@ -111,6 +90,41 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
             }
         }
     }
+
+
+    private void testJuknis(){
+
+        // CONTENT PAKAI PEMISAH ~ DAN `
+        // ~ TIDAK ADA SPASI ANTAR LIST
+        // ` TADA SPASI ANTAR LIST
+
+        ArrayList<ModelJuknis> arrayList = new ArrayList<>();
+        STool.newJuknisToArray(arrayList,"PengumumanUn",1,"1. Kirim Data Siswa (Excel)","Format excel yang diimport harus sesuai dengan format yang telah ditentukan");
+        STool.newJuknisToArray(arrayList, "PengumumanUn",2,"2. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
+        STool.newJuknisToArray(arrayList, "PengumumanUn",3,"3. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
+
+        STool.showJuknis(this, arrayList);
+    }
+
+//    public static String kategoriUn = "Pengumuman UN";
+//
+//    public ArrayList<ModelJuknis> getJuknisPengumumanUn(){
+//
+//        ArrayList<ModelJuknis> array = new ArrayList<>();
+//
+//        array.add(new ModelJuknis(kategoriUn,"1. Kirim Data Siswa (Excel)", "Format excel yang diimport harus sesuai dengan format yang telah ditentukan", 1));
+//        array.add(new ModelJuknis(kategoriUn,"2. Cetak PIN Siswa", "PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.", 2));
+//        array.add(new ModelJuknis(kategoriUn,"3. Simulasi Pengmuman", "Anda dapat melakukan simulasi pengumuman, untuk memastikan pesan sampai pada siswa / orang tua.", 3));
+//        array.add(new ModelJuknis(kategoriUn,"4. Kirim Data UN per Jurusan", "Format excel yang diimport harus sesuai dengan format yang telah ditentukan.~Kolom STATUS:<ul>" +
+//                "<li> [K] Kirim, untuk siswa yang telah menyelesaikan administrasi dan keuangan, dapat langsung menerima pengumuman pada saat tombol \"Umumkan Sekarang\" ditekan.</li>" +
+//                "<li> [T] Tunda, untuk siswa yang belum menyelesaikan administrasi dan keuangan, akan mendapat informasi kelulusan setelah diijinkan pada Form \"Pengaturan Lanjutan\".</li>" +
+//                "</ul>", 4));
+//
+//        Collections.sort(array,ModelJuknis.Sort);
+//
+//        return array;
+//    }
+
 
 
 }

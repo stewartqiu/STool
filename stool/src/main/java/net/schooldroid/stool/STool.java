@@ -1,18 +1,27 @@
 package net.schooldroid.stool;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+
+import net.schooldroid.stool.Juknis.ModelJuknis;
+import net.schooldroid.stool.Juknis.stJuknis;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.NetworkInterface;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -64,6 +73,52 @@ public class STool {
             return null;
         }
 
+    }
+
+
+    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList) {
+        Collections.sort(juknisArrayList,ModelJuknis.Sort);
+        stJuknis.arrayList =  juknisArrayList;
+        context.startActivity(new Intent(context, stJuknis.class));
+    }
+
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut));
+    }
+
+
+
+    public static String getWifiMacAddress() {
+        try {
+            String interfaceName = "wlan0";
+            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface intf : interfaces) {
+                if (!intf.getName().equalsIgnoreCase(interfaceName)){
+                    continue;
+                }
+
+                byte[] mac = intf.getHardwareAddress();
+                if (mac==null){
+                    return "";
+                }
+
+                StringBuilder buf = new StringBuilder();
+                for (byte aMac : mac) {
+                    buf.append(String.format("%02X:", aMac));
+                }
+                if (buf.length()>0) {
+                    buf.deleteCharAt(buf.length() - 1);
+                }
+                return buf.toString();
+            }
+        } catch (Exception ex) { }
+        return "";
+    }
+
+
+
+    public static String getBtMacAddress(Context context){
+        return android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
     }
 
 
