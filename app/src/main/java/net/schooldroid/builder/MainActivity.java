@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         // ` TADA SPASI ANTAR LIST
 
         ArrayList<ModelJuknis> arrayList = new ArrayList<>();
-        STool.newJuknisToArray(arrayList,"PengumumanUn",1,"1. Kirim Data Siswa (Excel)","Format excel yang diimport harus sesuai dengan format yang telah ditentukan");
-        STool.newJuknisToArray(arrayList, "PengumumanUn",2,"2. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
-        STool.newJuknisToArray(arrayList, "PengumumanUn",3,"3. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
+        STool.newJuknisToArray(arrayList,"PengumumanUn",1,"1. Kirim Data Siswa (Excel)","Format excel yang diimport harus sesuai dengan format yang telah ditentukan", Second.class);
+        STool.newJuknisToArray(arrayList, "PengumumanUn",2,"2. Cetak PIN Siswa","Berikut adalah listnya : ^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^",null);
+        STool.newJuknisToArray(arrayList, "PengumumanUn",3,"3. Cetak PIN Siswa","^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^",null);
 
         STool.showJuknis(this, arrayList, "PengumumanUn");
     }
@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 //
 //        return array;
 //    }
-
 
 
 }

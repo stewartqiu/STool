@@ -1,5 +1,7 @@
 package net.schooldroid.stool.Juknis;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 import net.schooldroid.stool.R;
+import net.schooldroid.stool.STool;
 
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -27,10 +30,13 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
     private int selectedItem = UNSELECTED;
     RecyclerView recyclerView;
 
-    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList){
+    Context context;
+
+    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList, Context context){
         Collections.sort(arrayList ,ModelJuknis.Sort);
         this.recyclerView = recyclerView;
         this.arrayList = arrayList;
+        this.context = context;
     }
 
 
@@ -74,7 +80,6 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             expandableLayout.setOnExpansionUpdateListener(this);
 
             expandButton.setOnClickListener(this);
-
         }
 
         public void bind(){
@@ -86,6 +91,20 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
 
             headerText.setText(arrayList.get(position).header);
             contentText.setHtml(arrayList.get(position).content);
+            final Class<?> act = arrayList.get(position).linkToActivity;
+
+            if (act != null) {
+                contentText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        context.startActivity(new Intent(context, act));
+                    }
+                });
+            }
+            else {
+                contentText.setOnClickListener(null);
+            }
+
         }
 
         @Override

@@ -40,3 +40,4 @@ dependencies {
     implementation 'org.sufficientlysecure:html-textview:3.5'
     implementation 'org.jsoup:jsoup:1.10.3'
 }
+

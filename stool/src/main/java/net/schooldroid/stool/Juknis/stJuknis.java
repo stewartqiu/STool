@@ -29,11 +29,14 @@ public class stJuknis extends AppCompatActivity {
 
 
     private void initialSetup(){
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Petunjuk Teknis");
+
+        String kategori = arrayList.get(0).kategori;
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(kategori);
 
         recyclerView = findViewById(R.id.recyclerViewJuknis);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new JuknisAdapter(recyclerView, arrayList));
+        recyclerView.setAdapter(new JuknisAdapter(recyclerView, arrayList, this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 

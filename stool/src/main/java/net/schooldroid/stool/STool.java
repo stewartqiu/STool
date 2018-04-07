@@ -94,8 +94,8 @@ public class STool {
         context.startActivity(new Intent(context, stJuknis.class));
     }
 
-    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content){
-        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut));
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity));
     }
 
 
