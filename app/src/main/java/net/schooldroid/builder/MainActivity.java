@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 //        Log.d("MacAddress",STool.getWifiMacAddress());
 //        Log.d("Bluetooth_Address",STool.getBtMacAddress(this));
 
+
+
         Button button = findViewById(R.id.mybutt);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
