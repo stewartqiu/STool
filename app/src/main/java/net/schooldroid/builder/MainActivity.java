@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         STool.newJuknisToArray(arrayList, "PengumumanUn",2,"2. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
         STool.newJuknisToArray(arrayList, "PengumumanUn",3,"3. Cetak PIN Siswa","PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA." );
 
-        STool.showJuknis(this, arrayList);
+        STool.showJuknis(this, arrayList, "PengumumanUn");
     }
 
 //    public static String kategoriUn = "Pengumuman UN";

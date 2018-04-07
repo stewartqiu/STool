@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.view.Display;
 
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.Juknis.stJuknis;
@@ -76,9 +77,20 @@ public class STool {
     }
 
 
-    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList) {
-        Collections.sort(juknisArrayList,ModelJuknis.Sort);
-        stJuknis.arrayList =  juknisArrayList;
+    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori) {
+
+        // ambil yang hanya kategori
+
+        ArrayList<ModelJuknis> array = new ArrayList<>();
+
+        for (ModelJuknis item : juknisArrayList) {
+            if (item.kategori.equals(kategori)) {
+                array.add(item);
+            }
+        }
+
+        Collections.sort(array,ModelJuknis.Sort);
+        stJuknis.arrayList =  array;
         context.startActivity(new Intent(context, stJuknis.class));
     }
 
