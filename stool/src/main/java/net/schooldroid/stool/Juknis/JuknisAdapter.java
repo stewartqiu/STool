@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -72,6 +73,7 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
         HtmlTextView contentText;
         ImageView icon, contentImage;
         RelativeLayout contentParent;
+        Button linkBtn;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +84,8 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             icon = itemView.findViewById(R.id.arrowIcon);
             contentImage = itemView.findViewById(R.id.juknisContentImage);
             contentParent = itemView.findViewById(R.id.juknisContentParent);
+
+            linkBtn = itemView.findViewById(R.id.linkButton);
 
             expandableLayout.setInterpolator(new OvershootInterpolator());
         }
@@ -113,14 +117,21 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             final Class<?> act = arrayList.get(position).linkToActivity;
             // set on click kalau activity tidak null
             if (act != null) {
-                contentText.setOnClickListener(new View.OnClickListener() {
+                linkBtn.setVisibility(View.VISIBLE);
+                contentParent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         context.startActivity(new Intent(context, act));
                     }
                 });
+
+                linkBtn.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
+                contentText.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
             }
             else {
+                linkBtn.setVisibility(View.GONE);
+                contentParent.setOnClickListener(null);
+                linkBtn.setOnClickListener(null);
                 contentText.setOnClickListener(null);
             }
 

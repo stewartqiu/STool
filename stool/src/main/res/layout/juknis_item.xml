@@ -75,6 +75,21 @@
                 android:textColor="@android:color/black"
                 />
 
+            <Button
+                android:id="@+id/linkButton"
+                android:layout_below="@+id/juknisContentText"
+                android:text="Selanjutnya"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="10dp"
+                android:textColor="@android:color/white"
+                android:background="#5bb539"
+                android:visibility="gone"
+                />
+
         </RelativeLayout>
 
     </net.cachapa.expandablelayout.ExpandableLayout>
