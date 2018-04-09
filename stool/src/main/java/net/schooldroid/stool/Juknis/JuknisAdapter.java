@@ -2,8 +2,10 @@ package net.schooldroid.stool.Juknis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import com.squareup.picasso.Picasso;
+
 import net.cachapa.expandablelayout.ExpandableLayout;
 import net.schooldroid.stool.R;
-import net.schooldroid.stool.STool;
 
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -60,39 +64,54 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, ExpandableLayout.OnExpansionUpdateListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ExpandableLayout expandableLayout;
         RelativeLayout expandButton;
         TextView headerText;
         HtmlTextView contentText;
-        ImageView icon;
+        ImageView icon, contentImage;
+        RelativeLayout contentParent;
 
         public ViewHolder(View itemView) {
             super(itemView);
             expandableLayout = itemView.findViewById(R.id.expandable_layout);
             expandButton = itemView.findViewById(R.id.expand_button);
             headerText = itemView.findViewById(R.id.juknisHeader);
-            contentText = itemView.findViewById(R.id.juknisContent);
+            contentText = itemView.findViewById(R.id.juknisContentText);
             icon = itemView.findViewById(R.id.arrowIcon);
+            contentImage = itemView.findViewById(R.id.juknisContentImage);
+            contentParent = itemView.findViewById(R.id.juknisContentParent);
 
             expandableLayout.setInterpolator(new OvershootInterpolator());
-            expandableLayout.setOnExpansionUpdateListener(this);
-
-            expandButton.setOnClickListener(this);
         }
 
         public void bind(){
             int position = getAdapterPosition();
+
+            headerText.setText(arrayList.get(position).header);
+            contentText.setHtml(arrayList.get(position).content);
+            expandButton.setOnClickListener(this);
+
+
             boolean isSelected = position == selectedItem;
 
             expandButton.setSelected(isSelected);
             expandableLayout.setExpanded(isSelected, false);
 
-            headerText.setText(arrayList.get(position).header);
-            contentText.setHtml(arrayList.get(position).content);
-            final Class<?> act = arrayList.get(position).linkToActivity;
+            // RECYCLERVIEW BUG
+            if (isSelected) {
+                icon.setImageResource(R.drawable.expand_down);
+            } else {
+                icon.setImageResource(R.drawable.chevron_right);
+            }
 
+
+
+
+            // Link to activity
+            final Class<?> act = arrayList.get(position).linkToActivity;
+            // set on click kalau activity tidak null
             if (act != null) {
                 contentText.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -103,6 +122,24 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             }
             else {
                 contentText.setOnClickListener(null);
+            }
+
+
+
+            // Show image
+            Integer resourceId = arrayList.get(position).resourceId;
+            // image visibility gone kalau null
+            if (resourceId==null) {
+                contentImage.setVisibility(View.GONE);
+            }
+            // Tampilkan image kalau tidak null
+            else {
+                contentImage.setVisibility(View.VISIBLE);
+                Picasso.get()
+                        .load(resourceId)
+                        .centerInside()
+                        .resize(arrayList.get(position).imageWidth,arrayList.get(position).imageHeight)
+                        .into(contentImage);
             }
 
         }
@@ -116,7 +153,7 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 holder.icon.setImageResource(R.drawable.chevron_right);
             }
 
-            int position = getAdapterPosition();
+            final int position = getAdapterPosition();
             if (position == selectedItem) {
                 selectedItem = UNSELECTED;
             } else {
@@ -125,14 +162,16 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 icon.setImageResource(R.drawable.expand_down);
                 selectedItem = position;
             }
+
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.smoothScrollToPosition(position);
+                }
+            });
         }
 
-        @Override
-        public void onExpansionUpdate(float expansionFraction, int state) {
-            if (state == ExpandableLayout.State.EXPANDING) {
-                recyclerView.smoothScrollToPosition(getAdapterPosition());
-            }
-        }
+
     }
 
 }

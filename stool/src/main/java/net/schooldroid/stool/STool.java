@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
+import android.support.annotation.RawRes;
 import android.support.v4.content.ContextCompat;
 import android.view.Display;
 
@@ -94,8 +97,13 @@ public class STool {
         context.startActivity(new Intent(context, stJuknis.class));
     }
 
+
     public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity){
         juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity));
+    }
+
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity, @RawRes @DrawableRes @Nullable Integer resourceId, int imageWidth , int imageHeight){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity,resourceId,imageWidth, imageHeight));
     }
 
 

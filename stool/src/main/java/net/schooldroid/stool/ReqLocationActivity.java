@@ -53,7 +53,6 @@ public class ReqLocationActivity extends AppCompatActivity {
                 allowed = false;
                 break;
         }
-
         if (allowed){
             this.finish();
             if (listener!=null) {
