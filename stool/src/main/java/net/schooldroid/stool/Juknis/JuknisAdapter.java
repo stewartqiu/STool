@@ -2,10 +2,11 @@ package net.schooldroid.stool.Juknis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorSpace;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 import net.schooldroid.stool.R;
+import net.schooldroid.stool.STool;
 
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -37,11 +39,18 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
 
     Context context;
 
-    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList, Context context){
+    ArrayList<ModelJuknis> arrayListSub;
+
+    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList, ArrayList<ModelJuknis> arrayListSub,Context context, int openUrut){
         Collections.sort(arrayList ,ModelJuknis.Sort);
         this.recyclerView = recyclerView;
         this.arrayList = arrayList;
         this.context = context;
+        this.arrayListSub = arrayListSub;
+
+        if (openUrut > 0) {
+            selectedItem = openUrut - 1;
+        }
     }
 
 
@@ -97,8 +106,8 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             contentText.setHtml(arrayList.get(position).content);
             expandButton.setOnClickListener(this);
 
-
             boolean isSelected = position == selectedItem;
+
 
             expandButton.setSelected(isSelected);
             expandableLayout.setExpanded(isSelected, false);
@@ -111,12 +120,31 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
             }
 
 
-
-
-            // Link to activity
+            final String kategoriSubJuknis = arrayList.get(position).kategoriSubJuknis;
             final Class<?> act = arrayList.get(position).linkToActivity;
+
+            // set on click kalau ada subjuknis
+            if (kategoriSubJuknis != null && !kategoriSubJuknis.isEmpty()){
+
+                Collections.sort(arrayListSub, ModelJuknis.Sort);
+
+                if (!arrayListSub.isEmpty()) {
+                    linkBtn.setVisibility(View.VISIBLE);
+                    contentParent.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            STool.showJuknis(context,arrayListSub,kategoriSubJuknis,0);
+                        }
+                    });
+
+                    linkBtn.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
+                    contentText.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
+                }
+
+            }
             // set on click kalau activity tidak null
-            if (act != null) {
+            // Link to activity
+            else if (act != null) {
                 linkBtn.setVisibility(View.VISIBLE);
                 contentParent.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -134,6 +162,8 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 linkBtn.setOnClickListener(null);
                 contentText.setOnClickListener(null);
             }
+
+
 
 
 
@@ -172,14 +202,15 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 expandableLayout.expand();
                 icon.setImageResource(R.drawable.expand_down);
                 selectedItem = position;
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.smoothScrollToPosition(position);
+                    }
+                });
             }
 
-            new Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    recyclerView.smoothScrollToPosition(position);
-                }
-            });
+
         }
 
 

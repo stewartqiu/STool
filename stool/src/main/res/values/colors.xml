@@ -1,3 +1,7 @@
 <resources>
-    <color name="colorFocused">#bbdefb</color>
+    <color name="colorFocusedBlue">#bbdefb</color>
+    <color name="colorFocusedRed">#fababa</color>
+    <color name="colorFocusedGreen">#bafac9</color>
+    <color name="colorFocusedPurple">#d5bafa</color>
+    <color name="colorFocusedYellow">#f9f9b9</color>
 </resources>

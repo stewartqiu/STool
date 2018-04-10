@@ -80,32 +80,45 @@ public class STool {
     }
 
 
-    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori) {
-
-        // ambil yang hanya kategori
+    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori, int openUrut) {
 
         ArrayList<ModelJuknis> array = new ArrayList<>();
+        ArrayList<ModelJuknis> arraySub = new ArrayList<>();
 
         for (ModelJuknis item : juknisArrayList) {
             if (item.kategori.equals(kategori)) {
                 array.add(item);
+            } else if (item.kategori.startsWith(kategori+">")){
+                arraySub.add(item);
             }
         }
 
-        Collections.sort(array,ModelJuknis.Sort);
-        stJuknis.arrayList =  array;
+        Collections.sort(array, ModelJuknis.Sort);
+        stJuknis.arrayList = array;
+        stJuknis.openUrut = openUrut;
+        stJuknis.arrayListSub = arraySub;
+
         context.startActivity(new Intent(context, stJuknis.class));
+
     }
 
 
     public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,String.valueOf(urut),linkToActivity));
+    }
+
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity, @RawRes @DrawableRes @Nullable Integer imageResourceId, int imageWidth , int imageHeight){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,String.valueOf(urut),linkToActivity,imageResourceId,imageWidth, imageHeight));
+    }
+
+
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, String urut, String header, String content , Class<?> linkToActivity){
         juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity));
     }
 
-    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity, @RawRes @DrawableRes @Nullable Integer resourceId, int imageWidth , int imageHeight){
-        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity,resourceId,imageWidth, imageHeight));
+    public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, String urut, String header, String content , Class<?> linkToActivity, @RawRes @DrawableRes @Nullable Integer imageResourceId, int imageWidth , int imageHeight){
+        juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity,imageResourceId,imageWidth, imageHeight));
     }
-
 
 
     public static String getWifiMacAddress() {
@@ -138,7 +151,14 @@ public class STool {
 
 
     public static String getBtMacAddress(Context context){
-        return android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+
+        String result = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+
+        if (result != null) {
+            return result;
+        }
+
+        return "";
     }
 
 

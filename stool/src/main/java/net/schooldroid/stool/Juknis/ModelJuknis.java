@@ -15,18 +15,20 @@ public class ModelJuknis {
     public String kategori;
     public String header;
     public String content;
-    public int urut;
+    public String urut;
     public Class<?> linkToActivity = null;
     public @RawRes @DrawableRes @Nullable Integer resourceId = null;
     public int imageWidth = 0;
     public int imageHeight = 0;
+
+    String kategoriSubJuknis = "";
 
     public ModelJuknis(){
 
     }
 
 
-    public ModelJuknis (String kategori, String header, String content, int urut, Class<?> linkToActivity) {
+    public ModelJuknis (String kategori, String header, String content, String urut, Class<?> linkToActivity) {
         this.kategori = kategori;
         this.header = header;
         this.content = changeContentToHtml(content);
@@ -34,7 +36,7 @@ public class ModelJuknis {
         this.linkToActivity = linkToActivity;
     }
 
-    public ModelJuknis (String kategori, String header, String content, int urut, Class<?> linkToActivity, @Nullable Integer imageResourceId, int imageWidth, int imageHeight) {
+    public ModelJuknis (String kategori, String header, String content, String urut, Class<?> linkToActivity, @Nullable Integer imageResourceId, int imageWidth, int imageHeight) {
         this.kategori = kategori;
         this.header = header;
         this.content = changeContentToHtml(content);
@@ -44,8 +46,6 @@ public class ModelJuknis {
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
     }
-
-
 
 
 
@@ -70,10 +70,12 @@ public class ModelJuknis {
     }
 
 
+
     public static Comparator<ModelJuknis> Sort = new Comparator<ModelJuknis>() {
         @Override
         public int compare(ModelJuknis o1, ModelJuknis o2) {
-            return o1.urut - o2.urut;
+            String urut1 = o1.urut.replace(".",""); String urut2 = o2.urut.replace(".","");
+            return Integer.parseInt(urut1) - Integer.parseInt(urut2);
         }
     };
 

@@ -12,7 +12,7 @@
         android:elevation="6dp"
         android:padding="16dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:background="@drawable/juknis_item_background"
+        android:background="@drawable/juknis_item_background_green"
         >
 
         <TextView
@@ -79,12 +79,13 @@
                 android:id="@+id/linkButton"
                 android:layout_below="@+id/juknisContentText"
                 android:text="Selanjutnya"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
+                android:layout_width="120dp"
+                android:layout_height="32dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginEnd="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="10dp"
+                android:textSize="11dp"
                 android:textColor="@android:color/white"
                 android:background="#5bb539"
                 android:visibility="gone"
