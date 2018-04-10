@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         // ` TADA SPASI ANTAR LIST
 
         ArrayList<ModelJuknis> arrayList = new ArrayList<>();
-        STool.newJuknisToArray(arrayList,"Pengumuman","1","1. Kirim Data Siswa (Excel) $o$r","Format excel yang diimport harus sesuai dengan format yang telah ditentukan", Second.class, R.drawable.ic_12, 500, 150);
-        STool.newJuknisToArray(arrayList,"Pengumuman","2","2. Cetak PIN Siswa","Berikut adalah listnya : ^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^", null);
-        STool.newJuknisToArray(arrayList,"Pengumuman","3","3. Cetak PIN Siswa","^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^", null);
+        STool.newJuknisToArray(arrayList,"Pengumuman","1","1. Kirim Data Siswa (Excel)","Format excel yang diimport harus sesuai dengan format yang telah ditentukan", Second.class, R.drawable.ic_12, 500, 150);
+        STool.newJuknisToArray(arrayList,"Pengumuman","2","2. Cetak PIN Siswa $o$r","Berikut adalah listnya : ^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.~Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid~NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^", null);
+        STool.newJuknisToArray(arrayList,"Pengumuman","3","3. Cetak PIN Siswa $y","^PIN bisa dicetak dan dibagikan ke siswa dan orang tua.`Siswa dan orang tua bisa menginstall aplikasi SISWA dan ORANG TUA dari Schooldroid`NPSN, KELAS, dan PIN dibutuhkan saat masuk aplikasi SISWA / ORANG TUA.^", null);
         STool.newJuknisToArray(arrayList,"Pengumuman>UN","2.1","1. Header Pengumuman UN", "Content Saja",null);
         STool.newJuknisToArray(arrayList,"Pengumuman>UN","2.2","2. Header Pengumuman UN", "Content Saja",null);
         STool.newJuknisToArray(arrayList,"Pengumuman>UN","2.3","3. Header Pengumuman UN", "Content Saja",null);
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 
         // Open now and highlight
 
-        STool.showJuknis(this, arrayList, "Pengumuman",1);
+        STool.showJuknis(this, arrayList, "Pengumuman");
     }
 
 

@@ -80,7 +80,7 @@ public class STool {
     }
 
 
-    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori, int openUrut) {
+    public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori) {
 
         ArrayList<ModelJuknis> array = new ArrayList<>();
         ArrayList<ModelJuknis> arraySub = new ArrayList<>();
@@ -95,7 +95,6 @@ public class STool {
 
         Collections.sort(array, ModelJuknis.Sort);
         stJuknis.arrayList = array;
-        stJuknis.openUrut = openUrut;
         stJuknis.arrayListSub = arraySub;
 
         context.startActivity(new Intent(context, stJuknis.class));

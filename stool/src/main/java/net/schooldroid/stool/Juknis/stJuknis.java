@@ -16,7 +16,6 @@ import java.util.Objects;
 public class stJuknis extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    public static int openUrut;
     public static ArrayList<ModelJuknis> arrayList;
     public static ArrayList<ModelJuknis> arrayListSub;
 
@@ -40,7 +39,7 @@ public class stJuknis extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewJuknis);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new JuknisAdapter(recyclerView, arrayList, arrayListSub, this, openUrut));
+        recyclerView.setAdapter(new JuknisAdapter(recyclerView, arrayList, arrayListSub, this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 

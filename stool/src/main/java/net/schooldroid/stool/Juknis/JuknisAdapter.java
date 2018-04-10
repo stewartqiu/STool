@@ -41,16 +41,14 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
 
     ArrayList<ModelJuknis> arrayListSub;
 
-    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList, ArrayList<ModelJuknis> arrayListSub,Context context, int openUrut){
+    public JuknisAdapter (RecyclerView recyclerView, ArrayList<ModelJuknis> arrayList, ArrayList<ModelJuknis> arrayListSub,Context context){
         Collections.sort(arrayList ,ModelJuknis.Sort);
         this.recyclerView = recyclerView;
         this.arrayList = arrayList;
         this.context = context;
         this.arrayListSub = arrayListSub;
 
-        if (openUrut > 0) {
-            selectedItem = openUrut - 1;
-        }
+
     }
 
 
@@ -104,26 +102,30 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
 
             String header = arrayList.get(position).header;
 
-            if (header.contains("$o")) {
+            String headerToShow = header;
+            String tanda = "";
+            if (header.contains("$")) {
+                headerToShow = header.substring(0, header.indexOf("$"));
+                tanda = header.substring(header.indexOf("$"));
+            }
+
+            if (tanda.contains("$o")) {
                 selectedItem = position;
             }
 
-            if (header.contains("$r")) {
+            if (tanda.contains("$r")) {
                 expandButton.setBackgroundResource(R.drawable.juknis_item_background_red);
-            } else if (header.contains("$g")) {
+            } else if (tanda.contains("$g")) {
                 expandButton.setBackgroundResource(R.drawable.juknis_item_background_green);
-            } else if (header.contains("$b")) {
+            } else if (tanda.contains("$b")) {
                 expandButton.setBackgroundResource(R.drawable.juknis_item_background_blue);
-            } else if (header.contains("$p")) {
+            } else if (tanda.contains("$p")) {
                 expandButton.setBackgroundResource(R.drawable.juknis_item_background_purple);
-            } else if (header.contains("$y")) {
+            } else if (tanda.contains("$y")) {
                 expandButton.setBackgroundResource(R.drawable.juknis_item_background_yellow);
             }
 
-            String headerToShow = header;
-            if (header.contains("$")) {
-                headerToShow = header.substring(0, header.indexOf("$"));
-            }
+
 
             headerText.setText(headerToShow);
             contentText.setHtml(arrayList.get(position).content);
@@ -154,7 +156,7 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 if (!arrayListSub.isEmpty()) {
                     linkBtn.setVisibility(View.VISIBLE);
                     contentParent.setOnClickListener(new View.OnClickListener() {
-                        @Override public void onClick(View view) { STool.showJuknis(context,arrayListSub,kategoriSubJuknis,0); }
+                        @Override public void onClick(View view) { STool.showJuknis(context,arrayListSub,kategoriSubJuknis); }
                     });
 
                     linkBtn.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
