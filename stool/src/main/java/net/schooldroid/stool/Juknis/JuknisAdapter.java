@@ -102,7 +102,30 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
         public void bind(){
             int position = getAdapterPosition();
 
-            headerText.setText(arrayList.get(position).header);
+            String header = arrayList.get(position).header;
+
+            if (header.contains("$o")) {
+                selectedItem = position;
+            }
+
+            if (header.contains("$r")) {
+                expandButton.setBackgroundResource(R.drawable.juknis_item_background_red);
+            } else if (header.contains("$g")) {
+                expandButton.setBackgroundResource(R.drawable.juknis_item_background_green);
+            } else if (header.contains("$b")) {
+                expandButton.setBackgroundResource(R.drawable.juknis_item_background_blue);
+            } else if (header.contains("$p")) {
+                expandButton.setBackgroundResource(R.drawable.juknis_item_background_purple);
+            } else if (header.contains("$y")) {
+                expandButton.setBackgroundResource(R.drawable.juknis_item_background_yellow);
+            }
+
+            String headerToShow = header;
+            if (header.contains("$")) {
+                headerToShow = header.substring(0, header.indexOf("$"));
+            }
+
+            headerText.setText(headerToShow);
             contentText.setHtml(arrayList.get(position).content);
             expandButton.setOnClickListener(this);
 
@@ -131,10 +154,7 @@ public class JuknisAdapter extends RecyclerView.Adapter<JuknisAdapter.ViewHolder
                 if (!arrayListSub.isEmpty()) {
                     linkBtn.setVisibility(View.VISIBLE);
                     contentParent.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            STool.showJuknis(context,arrayListSub,kategoriSubJuknis,0);
-                        }
+                        @Override public void onClick(View view) { STool.showJuknis(context,arrayListSub,kategoriSubJuknis,0); }
                     });
 
                     linkBtn.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View view) { contentParent.performClick(); }});
