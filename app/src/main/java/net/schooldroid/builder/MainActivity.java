@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.STool;
-import net.schooldroid.stool.sXls;
 
 
 import java.util.ArrayList;
