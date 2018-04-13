@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.util.Log;
 
+import net.schooldroid.stool.STool;
+
 import org.jsoup.helper.StringUtil;
 
 import java.util.Comparator;
@@ -31,7 +33,7 @@ public class ModelJuknis {
     public ModelJuknis (String kategori, String header, String content, String urut, Class<?> linkToActivity) {
         this.kategori = kategori;
         this.header = header;
-        this.content = changeContentToHtml(content);
+        this.content = STool.changeContentToHtml(content);
         this.urut = urut;
         this.linkToActivity = linkToActivity;
     }
@@ -39,7 +41,7 @@ public class ModelJuknis {
     public ModelJuknis (String kategori, String header, String content, String urut, Class<?> linkToActivity, @Nullable Integer imageResourceId, int imageWidth, int imageHeight) {
         this.kategori = kategori;
         this.header = header;
-        this.content = changeContentToHtml(content);
+        this.content = STool.changeContentToHtml(content);
         this.urut = urut;
         this.linkToActivity = linkToActivity;
         this.resourceId = imageResourceId;
@@ -49,25 +51,7 @@ public class ModelJuknis {
 
 
 
-    public String changeContentToHtml(String content) {
 
-
-            String change = "";
-            String[] pisah = content.split(Pattern.quote("^"));
-
-            for (int i = 0 ; i < pisah.length ; i++){
-                if (i % 2 == 1) {
-                    pisah[i] = "<ol><li>" + pisah[i].replace("~","</li><li>").replace("`","</li><br><li>") + "</li></ol>";
-                }
-
-                change = change + pisah[i];
-            }
-
-            return change;
-
-
-        //String change = "<ol><li>" + content.replace("~","</li><li>").replace("`","</li><br><li>") + "</li></ol>";
-    }
 
 
 

@@ -8,12 +8,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+
 
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.STool;
+import net.schooldroid.stool.sXls;
+
 
 import java.util.ArrayList;
-import java.util.Collections;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements STool.locAccessListener {
@@ -24,18 +30,51 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Log.d("MacAddress",STool.getWifiMacAddress());
-//        Log.d("Bluetooth_Address",STool.getBtMacAddress(this));
-
 
 
         Button button = findViewById(R.id.mybutt);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                STool.handleLocationPermission(MainActivity.this, MainActivity.this);
+                //STool.handleLocationPermission(MainActivity.this, MainActivity.this);
+                test();
             }
         });
+
+
+
+
+
+    }
+
+
+
+    private void test() {
+
+//        ArrayList<Map<String,String>> array = new ArrayList<>();
+//
+//        Map<String,String> map = new HashMap<>();
+//        map.put("1","Col1");
+//        map.put("2","Col2");
+//        map.put("3","Col3");
+//        map.put("4","Col4");
+//        map.put("5","Col5");
+//
+//
+//        Map<String,String> map2 = new HashMap<>();
+//        map2.put("1","11");
+//        map2.put("2","12");
+//        map2.put("3","13");
+//        map2.put("4","14");
+//        map2.put("5","15");
+//
+//        array.add(map);
+//        array.add(map2);
+//
+//        sXls xls = new sXls(this);
+//        xls.write("test","FIRST SHEET",array);
+
+        STool.msgBox(this, "LIPSUM","<b>Lorem</b> <i>Ipsum</i><br>^Kamu~Aku~Dia^","Yoi", "No", "Back");
 
     }
 
@@ -45,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
     public void onSuccess() {
 
 
-//        new async().execute();
+        new async().execute();
 //
 //        SGps.reqHighGps(this);
 //
@@ -59,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 //        });
 
 
-        testJuknis();
+        //testJuknis();
 
     }
 
@@ -89,16 +128,15 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
             progressDialog.dismiss();
             if (result!=null) {
                 Log.d("Hehehe", String.valueOf(result.entrySet()));
+                Log.d("Long", String.valueOf(result.size()));
             }
+
         }
     }
 
 
     private void testJuknis(){
 
-        // CONTENT PAKAI PEMISAH ~ DAN `
-        // ~ TIDAK ADA SPASI ANTAR LIST
-        // ` TADA SPASI ANTAR LIST
 
         ArrayList<ModelJuknis> arrayList = new ArrayList<>();
         STool.newJuknisToArray(arrayList,"Pengumuman","1","1. Kirim Data Siswa (Excel)","Format excel yang diimport harus sesuai dengan format yang telah ditentukan", Second.class, R.drawable.ic_12, 500, 150);
@@ -111,7 +149,9 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         STool.newJuknisToArray(arrayList,"Pengumuman>UN>Spontan>Uhuy","2.3.1.1","1. Header Pengumuman UN Spontan Uhuy", "Content Saja",null);
         STool.newJuknisToArray(arrayList,"Pengumuman>Info","3.1","1. Header Pengumuman Info", "Content Saja",null);
 
-        // Open now and highlight
+
+        // TANDA PANAH DAN CREDENTIAL AUTHTOKEN JITPACK
+
 
         STool.showJuknis(this, arrayList, "Pengumuman");
     }

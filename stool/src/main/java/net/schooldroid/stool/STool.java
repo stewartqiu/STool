@@ -2,6 +2,7 @@ package net.schooldroid.stool;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
 import android.support.v4.content.ContextCompat;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.Juknis.stJuknis;
@@ -19,6 +23,8 @@ import net.schooldroid.stool.Juknis.stJuknis;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.NetworkInterface;
@@ -27,6 +33,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class STool {
@@ -46,9 +53,19 @@ public class STool {
         }
     }
 
+
+
+
+
     public static boolean checkLocationPermission(Context context) {
         return Build.VERSION.SDK_INT < 23 || ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
+
+
+
+
+
+
 
     public static Map<String,String> getNpsnScrap(String npsn) {
         String baseUrl = "http://referensi.data.kemdikbud.go.id/tabs.php?npsn=";
@@ -80,6 +97,29 @@ public class STool {
     }
 
 
+
+    public static String changeContentToHtml(String content) {
+        String change = "";
+        String[] pisah = content.split(Pattern.quote("^"));
+
+        for (int i = 0 ; i < pisah.length ; i++){
+            if (i % 2 == 1) {
+                pisah[i] = "<ol><li>" + pisah[i].replace("~","</li><li>").replace("`","</li><br><li>") + "</li></ol>";
+            }
+
+            change = change + pisah[i];
+        }
+
+        return change;
+
+
+        //String change = "<ol><li>" + content.replace("~","</li><li>").replace("`","</li><br><li>") + "</li></ol>";
+    }
+
+
+
+    // TODO JUKNIS
+
     public static void showJuknis(Context context, ArrayList <ModelJuknis> juknisArrayList, String kategori) {
 
         ArrayList<ModelJuknis> array = new ArrayList<>();
@@ -98,9 +138,7 @@ public class STool {
         stJuknis.arrayListSub = arraySub;
 
         context.startActivity(new Intent(context, stJuknis.class));
-
     }
-
 
     public static void newJuknisToArray(ArrayList<ModelJuknis> juknisArrayList, String kategori, int urut, String header, String content , Class<?> linkToActivity){
         juknisArrayList.add(new ModelJuknis(kategori,header,content,String.valueOf(urut),linkToActivity));
@@ -119,6 +157,102 @@ public class STool {
         juknisArrayList.add(new ModelJuknis(kategori,header,content,urut,linkToActivity,imageResourceId,imageWidth, imageHeight));
     }
 
+
+
+
+
+
+
+    // TODO MESSAGE BOX
+
+    public static void msgBox(Activity activity , String judul, String isiHtml, String tombol1, String tombol2 ,String tombol3){
+
+        View customView =  activity.getLayoutInflater().inflate(R.layout.custom_msgbox,null);
+        TextView tvJudul = customView.findViewById(R.id.title_msgbox);
+        HtmlTextView tvIsi = customView.findViewById(R.id.content_msgbox);
+        Button btn1 = customView.findViewById(R.id.btn1_msgbox);
+        Button btn2 = customView.findViewById(R.id.btn2_msgbox);
+        Button btn3 = customView.findViewById(R.id.btn3_msgbox);
+
+        tvJudul.setText(judul);
+        tvIsi.setHtml(STool.changeContentToHtml(isiHtml));
+
+        btn1.setVisibility(View.VISIBLE);
+        btn2.setVisibility(View.VISIBLE);
+        btn3.setVisibility(View.VISIBLE);
+
+        btn1.setText(tombol1);
+        btn2.setText(tombol2);
+        btn3.setText(tombol3);
+
+
+        AlertDialog builder = new AlertDialog.Builder(activity)
+                .setView(customView)
+                .create();
+
+        builder.show();
+    }
+
+
+    public static void msgBox(Activity activity , String judul, String isiHtml, String tombol1, String tombol2){
+
+        View customView =  activity.getLayoutInflater().inflate(R.layout.custom_msgbox,null);
+        TextView tvJudul = customView.findViewById(R.id.title_msgbox);
+        HtmlTextView tvIsi = customView.findViewById(R.id.content_msgbox);
+        Button btn1 = customView.findViewById(R.id.btn1_msgbox);
+        Button btn2 = customView.findViewById(R.id.btn2_msgbox);
+        Button btn3 = customView.findViewById(R.id.btn3_msgbox);
+
+        tvJudul.setText(judul);
+        tvIsi.setHtml(STool.changeContentToHtml(isiHtml));
+
+        btn1.setVisibility(View.VISIBLE);
+        btn2.setVisibility(View.VISIBLE);
+        btn3.setVisibility(View.GONE);
+
+        btn1.setText(tombol1);
+        btn2.setText(tombol2);
+
+
+        AlertDialog builder = new AlertDialog.Builder(activity)
+                .setView(customView)
+                .create();
+
+        builder.show();
+    }
+
+    public static void msgBox(Activity activity , String judul, String isiHtml, String tombol1){
+
+        View customView =  activity.getLayoutInflater().inflate(R.layout.custom_msgbox,null);
+        TextView tvJudul = customView.findViewById(R.id.title_msgbox);
+        HtmlTextView tvIsi = customView.findViewById(R.id.content_msgbox);
+        Button btn1 = customView.findViewById(R.id.btn1_msgbox);
+        Button btn2 = customView.findViewById(R.id.btn2_msgbox);
+        Button btn3 = customView.findViewById(R.id.btn3_msgbox);
+
+        tvJudul.setText(judul);
+        tvIsi.setHtml(STool.changeContentToHtml(isiHtml));
+
+        btn1.setVisibility(View.GONE);
+        btn2.setVisibility(View.VISIBLE);
+        btn3.setVisibility(View.GONE);
+
+        btn2.setText(tombol1);
+
+
+        AlertDialog builder = new AlertDialog.Builder(activity)
+                .setView(customView)
+                .create();
+
+        builder.show();
+    }
+
+
+
+
+
+
+    // TODO UTILS
 
     public static String getWifiMacAddress() {
         try {
@@ -148,7 +282,6 @@ public class STool {
     }
 
 
-
     public static String getBtMacAddress(Context context){
 
         String result = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
@@ -159,6 +292,20 @@ public class STool {
 
         return "";
     }
+
+
+
+
+//    public static String changeRomawiKelas(String kelas) {
+//        String result = kelas.toUpperCase().replace("XV","15").replace("XIV","14").replace("XIII","13")
+//                .replace("XII","12").replace("XI","11").replace("X","10")
+//                .replace("IX","9").replace("VIII","8").replace("VII","7").replace("VI","6").replace("V","5")
+//                .replace("IV","4").replace("III","3").replace("II","2").replace("I","1").replace(" ","");
+//
+//        return result;
+//    }
+
+
 
 
 

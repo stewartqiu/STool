@@ -31,7 +31,12 @@ public class stJuknis extends AppCompatActivity {
     private void initialSetup(){
         String kategori = arrayList.get(0).kategori;
 
+        if (kategori.contains(">")){
+            kategori = kategori.substring(kategori.lastIndexOf(">")+1, kategori.length());
+        }
+
         Objects.requireNonNull(getSupportActionBar()).setTitle(kategori);
+
 
 
         handleSubJuknis();

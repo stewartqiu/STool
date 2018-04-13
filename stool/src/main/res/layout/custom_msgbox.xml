@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_msgbox"
+                android:background="#34A8A7"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:layout_centerHorizontal="true"
+                android:text="LOREM IPSUM DOLO"
+                android:fontFamily="sans-serif"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/content_msgbox"
+                android:textColor="#0f54a8"
+                android:padding="15dp"
+                android:layout_below="@id/title_msgbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales pharetra purus at finibus."
+                android:textSize="17sp"
+                android:fontFamily="sans-serif"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/content_msgbox"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+
+                <Button
+                    android:id="@+id/btn3_msgbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#34A8A7"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="#ffffff"
+                    android:text="Batal"/>
+
+
+                <Button
+                    android:id="@+id/btn2_msgbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#34A8A7"
+                    android:textColor="#ffffff"
+                    android:text="Tidak"
+                    />
+
+                <Button
+                    android:id="@+id/btn1_msgbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#34A8A7"
+                    android:layout_marginStart="8dp"
+                    android:textColor="#ffffff"
+                    android:text="Ya"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+</RelativeLayout>
