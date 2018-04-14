@@ -24,6 +24,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
+import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -73,6 +74,7 @@ public class STool {
         try {
             Document document = Jsoup.connect(urlToScrap).get();
             Elements elements = document.select("#tabs-1 table tbody tr td:first-child table tbody tr td:nth-child(4)"); //#box-table-a tbody tr:first-child td
+            Elements elements1 = document.select("#tabs-6 table tbody tr:nth-child(4) td:nth-child(4)");
 
             Map<String,String> dict = new HashMap<>();
 
@@ -87,6 +89,7 @@ public class STool {
             dict.put("status",elements.get(8).text());
             dict.put("waktu",elements.get(9).text());
             dict.put("jenjang",elements.get(10).text());
+            dict.put("email",elements1.get(0).text());
 
             return dict;
         } catch (IOException e) {

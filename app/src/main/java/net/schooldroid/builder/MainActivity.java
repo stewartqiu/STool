@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 
@@ -18,7 +17,7 @@ import net.schooldroid.stool.STool;
 
 import java.util.ArrayList;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements STool.locAccessListener {
@@ -39,11 +38,6 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
                 test();
             }
         });
-
-
-
-
-
     }
 
 
