@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 //        sXls xls = new sXls(this);
 //        xls.write("test","FIRST SHEET",array);
 
-        STool.msgBox(this, "LIPSUM","<b>Lorem</b> <i>Ipsum</i><br>^Kamu~Aku~Dia^","Yoi", "No", "Back");
+        //String a = STool.msgBox(this, "LIPSUM","<b>Lorem</b> <i>Ipsum</i><br>^Kamu~Aku~Dia^","Yoi", "No", "Back");
+       // Log.d("MsgBox",a);
 
     }
 

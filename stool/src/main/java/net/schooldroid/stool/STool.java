@@ -188,6 +188,27 @@ public class STool {
         btn2.setText(tombol2);
         btn3.setText(tombol3);
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         AlertDialog builder = new AlertDialog.Builder(activity)
                 .setView(customView)
@@ -216,6 +237,20 @@ public class STool {
         btn1.setText(tombol1);
         btn2.setText(tombol2);
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         AlertDialog builder = new AlertDialog.Builder(activity)
                 .setView(customView)
@@ -241,6 +276,13 @@ public class STool {
         btn3.setVisibility(View.GONE);
 
         btn2.setText(tombol1);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
         AlertDialog builder = new AlertDialog.Builder(activity)
