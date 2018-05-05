@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.Juknis.stJuknis;
+import net.schooldroid.stool.WebView.WebView_Opener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,31 +39,6 @@ import java.util.regex.Pattern;
 
 
 public class STool {
-
-    public interface locAccessListener{
-        void onSuccess();
-    }
-
-
-    public static void handleLocationPermission(Activity activity, STool.locAccessListener listener){
-        boolean isAllow = checkLocationPermission(activity);
-        if (!isAllow) {
-            ReqLocationActivity.listener = listener;
-            activity.startActivity(new Intent(activity, ReqLocationActivity.class));
-        } else {
-            listener.onSuccess();
-        }
-    }
-
-
-
-
-
-    public static boolean checkLocationPermission(Context context) {
-        return Build.VERSION.SDK_INT < 23 || ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-
 
 
 
@@ -290,6 +266,18 @@ public class STool {
                 .create();
 
         builder.show();
+    }
+
+
+
+
+
+
+
+    // TODO WEB VIEW OPEN
+    public static void openWebView(Context context, String url) {
+        WebView_Opener.url = url;
+        context.startActivity(new Intent(context,WebView_Opener.class));
     }
 
 

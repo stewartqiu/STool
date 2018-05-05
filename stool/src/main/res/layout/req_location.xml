@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReqLocationActivity"
+    tools:context=".Permission.ReqLocationActivity"
     android:background="#e8f5ff">
 
 
@@ -29,7 +29,7 @@
             android:layout_marginBottom="20dp"/>
 
         <Button
-            android:id="@+id/reqLocationButton"
+            android:id="@+id/reqButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="Izinkan"

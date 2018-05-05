@@ -2,6 +2,7 @@ package net.schooldroid.builder;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-
+import net.schooldroid.stool.Permission.HandlePermission;
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.STool;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements STool.locAccessListener {
+public class MainActivity extends AppCompatActivity implements HandlePermission.Listener {
 
 
     @Override
@@ -30,12 +31,17 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 
 
 
+
+
         Button button = findViewById(R.id.mybutt);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //STool.handleLocationPermission(MainActivity.this, MainActivity.this);
-                test();
+                //HandlePermission.location(MainActivity.this,MainActivity.this);
+                //HandlePermission.storage(MainActivity.this, MainActivity.this);
+                //HandlePermission.camera(MainActivity.this, MainActivity.this);
+                //test();
+                startActivity(new Intent(MainActivity.this,Second.class));
             }
         });
     }
@@ -73,12 +79,12 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
     }
 
 
-
     @Override
-    public void onSuccess() {
+    public void onPermissionGranted() {
 
+        Log.d("ME", "AWESOME!!!!!!");
 
-        new async().execute();
+        //new async().execute();
 //
 //        SGps.reqHighGps(this);
 //
@@ -95,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
         //testJuknis();
 
     }
+
+
 
     @SuppressLint("StaticFieldLeak")
     private class async extends AsyncTask<Void,Void,Void> {
@@ -127,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements STool.locAccessLi
 
         }
     }
+
 
 
     private void testJuknis(){
