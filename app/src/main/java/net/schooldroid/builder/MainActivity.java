@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import net.schooldroid.stool.AutoEmail.GMailSender;
 import net.schooldroid.stool.Permission.HandlePermission;
 import net.schooldroid.stool.Juknis.ModelJuknis;
 import net.schooldroid.stool.STool;
@@ -30,9 +31,6 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
         setContentView(R.layout.activity_main);
 
 
-
-
-
         Button button = findViewById(R.id.mybutt);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
                 //HandlePermission.storage(MainActivity.this, MainActivity.this);
                 //HandlePermission.camera(MainActivity.this, MainActivity.this);
                 //test();
-                startActivity(new Intent(MainActivity.this,Second.class));
+                //startActivity(new Intent(MainActivity.this,Second.class));
+
             }
         });
     }
@@ -81,25 +80,7 @@ public class MainActivity extends AppCompatActivity implements HandlePermission.
 
     @Override
     public void onPermissionGranted() {
-
         Log.d("ME", "AWESOME!!!!!!");
-
-        //new async().execute();
-//
-//        SGps.reqHighGps(this);
-//
-//        final SGps sgps = new SGps(MainActivity.this);
-//        sgps.on(new LocationListener() {
-//            @Override
-//            public void onLocationChanged(Location location) {
-//                Log.d("GPS DEBUG", "" + location.getLatitude() + "," + location.getLongitude() );
-//                sgps.off();
-//            }
-//        });
-
-
-        //testJuknis();
-
     }
 
 
