@@ -14,7 +14,7 @@ public class Second extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        STool.openWebView(this, "http://darmayudha.com/en/category/news-id/");
+        STool.openWebView(this, "http://darmayudha.com/en/category/news-id/","Web Sekolah");
 
     }
 

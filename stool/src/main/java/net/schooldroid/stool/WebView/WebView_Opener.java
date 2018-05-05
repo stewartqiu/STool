@@ -15,10 +15,13 @@ import android.widget.ProgressBar;
 
 import net.schooldroid.stool.R;
 
+import java.util.Objects;
+
 
 public class WebView_Opener extends AppCompatActivity {
 
     public static String url;
+    public static String title;
     WebView webView;
     ProgressBar pBar;
 
@@ -37,10 +40,15 @@ public class WebView_Opener extends AppCompatActivity {
 
 
     private void initialSetup() {
+
+        if (title!=null && !title.isEmpty()) {
+            Objects.requireNonNull(getSupportActionBar()).setTitle(title);
+        }
+
         webView = findViewById(R.id.webView);
         pBar = findViewById(R.id.simpleProgressBar);
         pBar.setMax(100);
-        //Objects.requireNonNull(getSupportActionBar()).hide();
+
     }
 
 

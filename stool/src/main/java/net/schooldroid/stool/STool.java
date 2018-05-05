@@ -275,8 +275,9 @@ public class STool {
 
 
     // TODO WEB VIEW OPEN
-    public static void openWebView(Context context, String url) {
+    public static void openWebView(Context context, String url, String actionBarTitle) {
         WebView_Opener.url = url;
+        WebView_Opener.title = actionBarTitle;
         context.startActivity(new Intent(context,WebView_Opener.class));
     }
 
